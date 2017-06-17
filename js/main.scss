@@ -1,0 +1,54 @@
+@import 'colors';
+@import 'variables';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+}
+.welcome {
+    @extend %mixinSection;
+    background: $slaider-background;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    h1 {
+        font-size: 2rem;
+        text-shadow: 1px 1px azure;
+    }
+}
+.gallery {
+    @extend %mixinSection;
+    background: $galery-background;
+    flex-flow: column;
+    .container{
+        width: 90%;
+        margin: 30px 0 30px 0;
+        .group-images {
+            width: 100%;
+            .images {
+                width: 100%;
+                li {
+                    display: inline-block;
+                    width: 31%;
+                    margin-right: 3%;
+                    margin-bottom: 3%;
+                    &:nth-child(3n+3) {
+                        margin-right: 0;
+                    }
+                    img {
+                        width: 100%;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+.load-more {
+    @extend %mixinSection;
+    width: 90%;
+    min-height: 100px;
+    margin: 30px 0 30px 0;
+}
