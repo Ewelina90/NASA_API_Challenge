@@ -9,6 +9,7 @@
 }
 .welcome {
     @extend %mixinSection;
+    flex-flow: column;
     background: $slaider-background;
     background-position: center center;
     background-repeat: no-repeat;
@@ -16,6 +17,12 @@
     h1 {
         font-size: 2rem;
         text-shadow: 1px 1px azure;
+    }
+    #msg {
+        width: 80%;
+        background-color: $msg-background;
+        padding: 10px;
+        margin-top: 50px;
     }
 }
 .gallery {

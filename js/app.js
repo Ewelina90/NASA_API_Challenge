@@ -64,9 +64,20 @@ $(() => {
         const img = 'url("'+response.url+'")';
         console.log(img);
         $welcome.css('background-image',img);
+        showText("#msg",response.explanation , 0, 50);
     }).fail(error => {
         console.log('error');
-    })
+    }).always(() => {
+        alert( "complete" );
+    });
 
     getImagesFromApi();
+
+    const showText = (target, message, index, interval) => {
+        if (index < message.length) {
+            $(target).append(message[index++]);
+            setTimeout(() => { showText(target, message, index, interval); }, interval);
+        }
+    }
+
 });
