@@ -6,6 +6,7 @@
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
+    color: white;
 }
 .welcome {
     @extend %mixinSection;
@@ -15,20 +16,25 @@
     background-repeat: no-repeat;
     background-size: cover;
     h1 {
-        font-size: 2rem;
-        text-shadow: 1px 1px azure;
+        font-size: 3rem;
+        text-shadow: 1px 1px navy;
     }
     #msg {
         width: 80%;
         background-color: $msg-background;
         padding: 10px;
         margin-top: 50px;
+        text-shadow: 1px 1px black;
     }
 }
 .gallery {
     @extend %mixinSection;
     background: $galery-background;
     flex-flow: column;
+    h2 {
+        margin-top: 30px;
+        font-size: 2rem;
+    }
     .container{
         width: 90%;
         margin: 30px 0 30px 0;
