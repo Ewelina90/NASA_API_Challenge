@@ -113,6 +113,11 @@ $(function () {
     };
     //Btn - load more pictures into gallery
     $loadBtn.on('click', function () {
+        getImagesFromApi();
+    });
+
+    //function - get images of a Mars from NASA
+    var getImagesFromApi = function getImagesFromApi() {
         $.ajax({
             url: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&sol=' + getRandomSol()
         }).done(function (response) {
@@ -124,7 +129,7 @@ $(function () {
         }).fail(function (error) {
             console.log('wystąpił error');
         });
-    });
+    };
 
     //Image for slaider
     $.ajax({
@@ -136,6 +141,8 @@ $(function () {
     }).fail(function (error) {
         console.log('error');
     });
+
+    getImagesFromApi();
 });
 
 /***/ }),
