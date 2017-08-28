@@ -1,7 +1,23 @@
 %mixinSection {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+// Slaider Menu
+$slaider-menu-width: 100%;
+$slaider-menu-height: auto;
+$slaider-menu-padding-hor: 10%;
+$slaider-menu-padding-ver: 20px;
+
+%mixinArrow {
+    position: absolute;
+    font-size: 3rem;
+    color: white;
+    height: 100vh;
+    width: 1.5em;
+    i {
+        padding-top: calc(100vh/2 - 3rem);
+    }
 }

@@ -75,16 +75,16 @@
 
 $(function () {
 
-    var $welcome = $('.welcome');
+    var $slaider = $('.slaider');
     var $loadBtn = $('.load-btn');
     var $gallery = $('.container');
 
-    //randomize number form range
+    //random number form range
     var getRandomInt = function getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
 
-    //randomize date
+    //random date
     var getRandomDate = function getRandomDate() {
         var day = getRandomInt(1, 28);
         var month = getRandomInt(1, 12);
@@ -132,18 +132,18 @@ $(function () {
     };
 
     //Image for slaider
-    $.ajax({
-        url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
-    }).done(function (response) {
-        var img = 'url("' + response.url + '")';
-        console.log(img);
-        $welcome.css('background-image', img);
-        showText("#msg", response.explanation, 0, 50);
-    }).fail(function (error) {
-        console.log('error');
-    }).always(function () {
-        alert("complete");
-    });
+    // $.ajax({
+    //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+    // }).done(response => {
+    //     const img = 'url("'+response.hdurl+'")';
+    //     console.log(img);
+    //     $slaider.css('background-image',img);
+    //     showText("#msg",response.explanation , 0, 50);
+    // }).fail(error => {
+    //     console.log('error');
+    // }).always(() => {
+    //     alert( "complete" );
+    // });
 
     getImagesFromApi();
 
@@ -197,7 +197,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".welcome, .gallery, .load-more {\n  width: 100vw;\n  min-height: 100vh;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif;\n  font-size: 30px;\n  color: white; }\n\n.welcome {\n  flex-flow: column;\n  background: black;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover; }\n  .welcome h1 {\n    font-size: 3rem;\n    text-shadow: 1px 1px navy; }\n  .welcome #msg {\n    width: 80%;\n    background-color: rgba(255, 255, 255, 0.2);\n    padding: 10px;\n    margin-top: 50px;\n    text-shadow: 1px 1px black; }\n\n.gallery {\n  background: grey;\n  flex-flow: column; }\n  .gallery h2 {\n    margin-top: 30px;\n    font-size: 2rem; }\n  .gallery .container {\n    width: 90%;\n    margin: 30px 0 30px 0; }\n    .gallery .container .group-images {\n      width: 100%; }\n      .gallery .container .group-images .images {\n        width: 100%; }\n        .gallery .container .group-images .images li {\n          display: inline-block;\n          width: 31%;\n          margin-right: 3%;\n          margin-bottom: 3%; }\n          .gallery .container .group-images .images li:nth-child(3n+3) {\n            margin-right: 0; }\n          .gallery .container .group-images .images li img {\n            width: 100%;\n            height: auto; }\n\n.load-more {\n  width: 90%;\n  min-height: 100px;\n  margin: 30px auto 30px auto; }\n  .load-more .load-btn {\n    background: blue;\n    border: none;\n    padding: 0.5rem; }\n", ""]);
+exports.push([module.i, ".slaider, .gallery, .load-more {\n  width: 100%;\n  min-height: 100vh;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.slaider .left-arrow, .slaider .right-arrow {\n  position: absolute;\n  font-size: 3rem;\n  color: white;\n  height: 100vh;\n  width: 1.5em; }\n  .slaider .left-arrow i, .slaider .right-arrow i {\n    padding-top: calc(100vh/2 - 3rem); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif;\n  font-size: 30px;\n  color: white; }\n\n.slaider {\n  flex-flow: column;\n  background: black;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: relative; }\n  .slaider .slaider-menu {\n    position: absolute;\n    top: 0;\n    width: 100%;\n    height: auto;\n    text-align: right;\n    padding: 20px 10%; }\n  .slaider .left-arrow {\n    left: 10%; }\n  .slaider .right-arrow {\n    right: 10%;\n    text-align: right; }\n  .slaider #msg {\n    position: absolute;\n    max-width: 50%;\n    bottom: 5.2rem;\n    text-align: center;\n    background-color: rgba(255, 255, 255, 0.2);\n    padding: 20px 30px;\n    text-shadow: 1px 1px black; }\n    .slaider #msg .picture-title {\n      display: block;\n      font-size: 1.1rem; }\n    .slaider #msg .picture-description {\n      display: none;\n      padding-top: 20px;\n      font-size: 0.9rem; }\n    .slaider #msg .expand {\n      font-size: 1.4rem;\n      color: white;\n      position: absolute;\n      z-index: 3;\n      right: -4px;\n      top: -6px;\n      transform: rotate(-45deg);\n      transform-origin: bottom; }\n  .slaider .slaider-active-pictures {\n    position: absolute;\n    bottom: 20px;\n    height: 1.2em; }\n    .slaider .slaider-active-pictures .active-picture {\n      color: white; }\n      .slaider .slaider-active-pictures .active-picture li {\n        display: inline-block;\n        padding-right: 1.1em; }\n\n.gallery {\n  background: grey;\n  flex-flow: column; }\n  .gallery h2 {\n    margin-top: 30px;\n    font-size: 2rem; }\n  .gallery .container {\n    width: 90%;\n    margin: 30px 0 30px 0; }\n    .gallery .container .group-images {\n      width: 100%; }\n      .gallery .container .group-images .images {\n        width: 100%; }\n        .gallery .container .group-images .images li {\n          display: inline-block;\n          width: 31%;\n          margin-right: 3%;\n          margin-bottom: 3%; }\n          .gallery .container .group-images .images li:nth-child(3n+3) {\n            margin-right: 0; }\n          .gallery .container .group-images .images li img {\n            width: 100%;\n            height: auto; }\n\n.load-more {\n  width: 90%;\n  min-height: 100px;\n  margin: 30px auto 30px auto; }\n  .load-more .load-btn {\n    background: blue;\n    border: none;\n    padding: 0.5rem; }\n", ""]);
 
 // exports
 

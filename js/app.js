@@ -1,15 +1,15 @@
 $(() => {
 
-    const $welcome = $('.welcome');
+    const $slaider = $('.slaider');
     const $loadBtn = $('.load-btn');
     const $gallery = $('.container');
 
-    //randomize number form range
+    //random number form range
     const getRandomInt = (min,max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    //randomize date
+    //random date
     const getRandomDate = () => {
         const day = getRandomInt(1,28);
         const month = getRandomInt(1,12);
@@ -58,18 +58,18 @@ $(() => {
     }
 
     //Image for slaider
-    $.ajax({
-        url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
-    }).done(response => {
-        const img = 'url("'+response.url+'")';
-        console.log(img);
-        $welcome.css('background-image',img);
-        showText("#msg",response.explanation , 0, 50);
-    }).fail(error => {
-        console.log('error');
-    }).always(() => {
-        alert( "complete" );
-    });
+    // $.ajax({
+    //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+    // }).done(response => {
+    //     const img = 'url("'+response.hdurl+'")';
+    //     console.log(img);
+    //     $slaider.css('background-image',img);
+    //     showText("#msg",response.explanation , 0, 50);
+    // }).fail(error => {
+    //     console.log('error');
+    // }).always(() => {
+    //     alert( "complete" );
+    // });
 
     getImagesFromApi();
 

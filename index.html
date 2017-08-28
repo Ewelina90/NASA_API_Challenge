@@ -5,12 +5,41 @@
     <title>NASA API Challenge</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://use.fontawesome.com/44763709f8.js"></script>
     <link rel="stylesheet" href="./css/reset.css">
 </head>
 <body>
-    <section class='welcome'>
-        <h1>NASA API Challenge</h1>
-        <div id="msg"></div>
+    <section class='slaider'>
+        <nav class="slaider-menu">
+            <ul class="slaider-menu-items">
+                <li>NASA API Challenge</li>
+                <li>APOD</li>
+                <li>ROVER</li>
+            </ul>
+        </nav>
+        <div class="left-arrow">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        </div>
+        <div class="right-arrow">
+            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+        </div>
+        <!-- <h1>NASA API Challenge</h1> -->
+        <div id="msg">
+            <h2 class="picture-title">Seen in silhouette against the rockets' glare, the spacecraft</h2>
+            <p class="picture-description hide">
+                Seen in silhouette against the rockets' glare, the spacecraft,
+                Seen in silhouette against the rockets' glare, the spacecraft
+                Seen in silhouette against the rockets' glare, the spacecraft
+            </p>
+            <i class="fa fa-caret-right expand" aria-hidden="true"></i>
+        </div>
+        <div class="slaider-active-pictures">
+            <ul class="active-picture">
+                <li id="picture-1"><i class="fa fa-circle-thin" aria-hidden="true"></i></li>
+                <li id="picture-2"><i class="fa fa-circle" aria-hidden="true"></i></li>
+                <li id="picture-3"><i class="fa fa-circle-thin" aria-hidden="true"></i></li>
+            </ul>
+        </div>
     </section>
 
     <section class='gallery'>

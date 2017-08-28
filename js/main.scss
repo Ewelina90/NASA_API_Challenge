@@ -8,23 +8,74 @@
     font-size: 30px;
     color: white;
 }
-.welcome {
+.slaider {
     @extend %mixinSection;
     flex-flow: column;
     background: $slaider-background;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    h1 {
-        font-size: 3rem;
-        text-shadow: 1px 1px navy;
+    position: relative;
+    .slaider-menu {
+        position: absolute;
+        top: 0;
+        width: $slaider-menu-width;
+        height: $slaider-menu-height;
+        text-align: right;
+        padding: $slaider-menu-padding-ver $slaider-menu-padding-hor;
     }
+    .left-arrow {
+        @extend %mixinArrow;
+        left: $slaider-menu-padding-hor;
+    }
+    .right-arrow {
+        @extend %mixinArrow;
+        right: $slaider-menu-padding-hor;
+        text-align: right;
+    }
+    // h1 {
+    //     font-size: 3rem;
+    //     text-shadow: 1px 1px navy;
+    // }
     #msg {
-        width: 80%;
+        position: absolute;
+        max-width: 50%;
+        bottom: 5.2rem;
+        text-align: center;
         background-color: $msg-background;
-        padding: 10px;
-        margin-top: 50px;
+        padding: $slaider-menu-padding-ver 30px;
         text-shadow: 1px 1px black;
+        .picture-title {
+            display: block;
+            font-size: 1.1rem;
+        }
+        .picture-description {
+            display: none;
+            padding-top: $slaider-menu-padding-ver;
+            font-size: 0.9rem;
+        }
+        .expand {
+            font-size: 1.4rem;
+            color: white;
+            position: absolute;
+            z-index: 3;
+            right: -4px;
+            top: -6px;
+            transform: rotate(-45deg);
+            transform-origin: bottom;
+        }
+    }
+    .slaider-active-pictures {
+        position: absolute;
+        bottom: $slaider-menu-padding-ver;
+        height: 1.2em;
+        .active-picture {
+            color: white;
+            li {
+                display: inline-block;
+                padding-right: 1.1em;
+            }
+        }
     }
 }
 .gallery {
