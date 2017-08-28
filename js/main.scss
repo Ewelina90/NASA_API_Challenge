@@ -1,5 +1,31 @@
 @import 'colors';
 @import 'variables';
+// @media (max-width: 800px) {
+//     .slaider-menu {
+//         .fa-bars {
+//             display: block;
+//             &:active {
+//                 display: none;
+//                 .fa-times {
+//                     display: block;
+//                 }
+//                 .slaider-menu-items {
+//                     display: block;
+//                 }
+//             }
+//
+//         }
+//         .fa-times {
+//             display: none;
+//         }
+//         .slaider-menu-items {
+//             display: none;
+//             li {
+//                 display:block;
+//             }
+//         }
+//     }
+// }
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +33,14 @@
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
     color: white;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+a:hover {
+    transition: 0.2s;
+    color: $nav-text-hover;
 }
 .slaider {
     @extend %mixinSection;
@@ -17,12 +51,24 @@
     background-size: cover;
     position: relative;
     .slaider-menu {
-        position: absolute;
+        position: fixed;
         top: 0;
         width: $slaider-menu-width;
         height: $slaider-menu-height;
         text-align: right;
         padding: $slaider-menu-padding-ver $slaider-menu-padding-hor;
+        text-shadow: 1px 1px darken($nav-background,40%);
+        z-index: 999;
+        &:hover {
+            transition: 0.2s;
+            background-color: $nav-background;
+        }
+        .slaider-menu-items {
+            li{
+                display: inline-block;
+                padding-left: 1.2em;
+            }
+        }
     }
     .left-arrow {
         @extend %mixinArrow;
@@ -44,7 +90,7 @@
         text-align: center;
         background-color: $msg-background;
         padding: $slaider-menu-padding-ver 30px;
-        text-shadow: 1px 1px black;
+        text-shadow: 1px 1px darken($msg-background,40%);
         .picture-title {
             display: block;
             font-size: 1.1rem;
