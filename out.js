@@ -78,6 +78,36 @@ $(function () {
     var $slaider = $('.slaider');
     var $loadBtn = $('.load-btn');
     var $gallery = $('.container');
+    var $menuOff = $('#bars');
+
+    // Hamburger menu
+    $menuOff.on('click', function () {
+        if ($(this).hasClass('fa-bars')) {
+            $(this).removeClass('fa-bars');
+            $(this).addClass('fa-times');
+        } else {
+            $(this).removeClass('fa-times');
+            $(this).addClass('fa-bars');
+        }
+        var $menuItems = $('#menu-items');
+        if ($menuItems.is(':hidden')) {
+            $menuItems.removeClass('slaider-menu-items');
+            $menuItems.addClass('slaider-menu-items-show');
+        } else {
+            $menuItems.removeClass('slaider-menu-items-show');
+            $menuItems.addClass('slaider-menu-items');
+        }
+    });
+
+    //  Close menu after click on link
+    $('#menu-items a').on('click', function () {
+        if ($menuOff.hasClass('fa-times')) {
+            $(this).parent().parent().removeClass('slaider-menu-items-show');
+            $(this).parent().parent().addClass('slaider-menu-items');
+            $menuOff.removeClass('fa-times');
+            $menuOff.addClass('fa-bars');
+        }
+    });
 
     //random number form range
     var getRandomInt = function getRandomInt(min, max) {
@@ -197,7 +227,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, ".slaider, .gallery, .load-more {\n  width: 100%;\n  min-height: 100vh;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.slaider .left-arrow, .slaider .right-arrow {\n  position: absolute;\n  font-size: 3rem;\n  color: white;\n  height: 100vh;\n  width: 1.5em; }\n  .slaider .left-arrow i, .slaider .right-arrow i {\n    padding-top: calc(100vh/2 - 3rem); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif;\n  font-size: 30px;\n  color: white; }\n\na {\n  text-decoration: none;\n  cursor: pointer; }\n\na:hover {\n  transition: 0.2s;\n  color: blue; }\n\n.slaider {\n  flex-flow: column;\n  background: black;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: relative; }\n  .slaider .slaider-menu {\n    position: fixed;\n    top: 0;\n    width: 100%;\n    height: auto;\n    text-align: right;\n    padding: 20px 10%;\n    text-shadow: 1px 1px rgba(153, 153, 153, 0.2);\n    z-index: 999; }\n    .slaider .slaider-menu:hover {\n      transition: 0.2s;\n      background-color: rgba(255, 255, 255, 0.2); }\n    .slaider .slaider-menu .slaider-menu-items li {\n      display: inline-block;\n      padding-left: 1.2em; }\n  .slaider .left-arrow {\n    left: 10%; }\n  .slaider .right-arrow {\n    right: 10%;\n    text-align: right; }\n  .slaider #msg {\n    position: absolute;\n    max-width: 50%;\n    bottom: 5.2rem;\n    text-align: center;\n    background-color: rgba(255, 255, 255, 0.2);\n    padding: 20px 30px;\n    text-shadow: 1px 1px rgba(153, 153, 153, 0.2); }\n    .slaider #msg .picture-title {\n      display: block;\n      font-size: 1.1rem; }\n    .slaider #msg .picture-description {\n      display: none;\n      padding-top: 20px;\n      font-size: 0.9rem; }\n    .slaider #msg .expand {\n      font-size: 1.4rem;\n      color: white;\n      position: absolute;\n      z-index: 3;\n      right: -4px;\n      top: -6px;\n      transform: rotate(-45deg);\n      transform-origin: bottom; }\n  .slaider .slaider-active-pictures {\n    position: absolute;\n    bottom: 20px;\n    height: 1.2em; }\n    .slaider .slaider-active-pictures .active-picture {\n      color: white; }\n      .slaider .slaider-active-pictures .active-picture li {\n        display: inline-block;\n        padding-right: 1.1em; }\n\n.gallery {\n  background: grey;\n  flex-flow: column; }\n  .gallery h2 {\n    margin-top: 30px;\n    font-size: 2rem; }\n  .gallery .container {\n    width: 90%;\n    margin: 30px 0 30px 0; }\n    .gallery .container .group-images {\n      width: 100%; }\n      .gallery .container .group-images .images {\n        width: 100%; }\n        .gallery .container .group-images .images li {\n          display: inline-block;\n          width: 31%;\n          margin-right: 3%;\n          margin-bottom: 3%; }\n          .gallery .container .group-images .images li:nth-child(3n+3) {\n            margin-right: 0; }\n          .gallery .container .group-images .images li img {\n            width: 100%;\n            height: auto; }\n\n.load-more {\n  width: 90%;\n  min-height: 100px;\n  margin: 30px auto 30px auto; }\n  .load-more .load-btn {\n    background: blue;\n    border: none;\n    padding: 0.5rem; }\n", ""]);
+exports.push([module.i, ".slaider, .gallery, .load-more {\n  width: 100%;\n  min-height: 100vh;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.slaider .left-arrow, .slaider .right-arrow {\n  position: absolute;\n  font-size: 3rem;\n  color: white;\n  height: 100vh;\n  width: 1.5em; }\n  .slaider .left-arrow i, .slaider .right-arrow i {\n    padding-top: calc(100vh/2 - 3rem); }\n\n* {\n  margin: 0;\n  padding: 0;\n  box-sizing: border-box;\n  font-family: 'Roboto', sans-serif;\n  font-size: 30px;\n  color: white; }\n\n.show {\n  display: block; }\n\na {\n  text-decoration: none;\n  cursor: pointer; }\n\na:hover {\n  transition: 0.2s;\n  color: blue; }\n\n.slaider {\n  flex-flow: column;\n  background: black;\n  background-position: center center;\n  background-repeat: no-repeat;\n  background-size: cover;\n  position: relative; }\n  .slaider .slaider-menu {\n    position: fixed;\n    top: 0;\n    width: 100%;\n    height: auto;\n    text-align: right;\n    padding: 20px 10%;\n    text-shadow: 1px 1px rgba(153, 153, 153, 0.2);\n    z-index: 999; }\n    .slaider .slaider-menu:hover {\n      transition: 0.2s;\n      background-color: rgba(255, 255, 255, 0.2); }\n    .slaider .slaider-menu .fa-bars, .slaider .slaider-menu .fa-times {\n      display: none; }\n    .slaider .slaider-menu .slaider-menu-items li {\n      display: inline-block;\n      padding-left: 1.2em; }\n    @media (max-width: 800px) {\n      .slaider .slaider-menu .fa-bars, .slaider .slaider-menu .fa-times {\n        z-index: 1000;\n        display: block;\n        padding: 10px 0 10px 10px; }\n      .slaider .slaider-menu .slaider-menu-items {\n        display: none; }\n      .slaider .slaider-menu .slaider-menu-items-show {\n        display: block;\n        padding-top: 12px; }\n        .slaider .slaider-menu .slaider-menu-items-show li {\n          display: block;\n          line-height: 2em; } }\n  .slaider .left-arrow {\n    left: 10%; }\n  .slaider .right-arrow {\n    right: 10%;\n    text-align: right; }\n  .slaider #msg {\n    position: absolute;\n    max-width: 50%;\n    bottom: 5.2rem;\n    text-align: center;\n    background-color: rgba(255, 255, 255, 0.2);\n    padding: 20px 30px;\n    text-shadow: 1px 1px rgba(153, 153, 153, 0.2); }\n    .slaider #msg .picture-title {\n      display: block;\n      font-size: 1.1rem; }\n    .slaider #msg .picture-description {\n      display: none;\n      padding-top: 20px;\n      font-size: 0.9rem; }\n    .slaider #msg .expand {\n      font-size: 1.4rem;\n      color: white;\n      position: absolute;\n      z-index: 3;\n      right: -4px;\n      top: -6px;\n      transform: rotate(-45deg);\n      transform-origin: bottom; }\n  .slaider .slaider-active-pictures {\n    position: absolute;\n    bottom: 20px;\n    height: 1.2em; }\n    .slaider .slaider-active-pictures .active-picture {\n      color: white; }\n      .slaider .slaider-active-pictures .active-picture li {\n        display: inline-block;\n        padding-right: 1.1em; }\n\n.gallery {\n  background: grey;\n  flex-flow: column; }\n  .gallery h2 {\n    margin-top: 30px;\n    font-size: 2rem; }\n  .gallery .container {\n    width: 90%;\n    margin: 30px 0 30px 0; }\n    .gallery .container .group-images {\n      width: 100%; }\n      .gallery .container .group-images .images {\n        width: 100%; }\n        .gallery .container .group-images .images li {\n          display: inline-block;\n          width: 31%;\n          margin-right: 3%;\n          margin-bottom: 3%; }\n          .gallery .container .group-images .images li:nth-child(3n+3) {\n            margin-right: 0; }\n          .gallery .container .group-images .images li img {\n            width: 100%;\n            height: auto; }\n\n.load-more {\n  width: 90%;\n  min-height: 100px;\n  margin: 30px auto 30px auto; }\n  .load-more .load-btn {\n    background: blue;\n    border: none;\n    padding: 0.5rem; }\n", ""]);
 
 // exports
 

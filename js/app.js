@@ -3,6 +3,39 @@ $(() => {
     const $slaider = $('.slaider');
     const $loadBtn = $('.load-btn');
     const $gallery = $('.container');
+    const $menuOff = $('#bars');
+
+    // Hamburger menu
+    $menuOff.on('click',function(){
+        if($(this).hasClass('fa-bars')) {
+            $(this).removeClass('fa-bars');
+            $(this).addClass('fa-times');
+        }
+        else{
+            $(this).removeClass('fa-times');
+            $(this).addClass('fa-bars');
+        }
+        const $menuItems = $('#menu-items');
+        if($menuItems.is(':hidden')){
+            $menuItems.removeClass('slaider-menu-items');
+            $menuItems.addClass('slaider-menu-items-show');
+        }
+        else {
+            $menuItems.removeClass('slaider-menu-items-show');
+            $menuItems.addClass('slaider-menu-items');
+        }
+    });
+
+    //  Close menu after click on link
+    $('#menu-items a').on('click',function(){
+        if($menuOff.hasClass('fa-times')){
+            $(this).parent().parent().removeClass('slaider-menu-items-show');
+            $(this).parent().parent().addClass('slaider-menu-items');
+            $menuOff.removeClass('fa-times');
+            $menuOff.addClass('fa-bars');
+        }
+    });
+
 
     //random number form range
     const getRandomInt = (min,max) => {
