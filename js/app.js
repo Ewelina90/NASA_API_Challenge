@@ -26,7 +26,7 @@ $(() => {
         }
     });
 
-    //  Close menu after click on link
+    //  Close menu border-width: 3px 0 3px 3px; after click on link
     $('#menu-items a').on('click',function(){
         if($menuOff.hasClass('fa-times')){
             $(this).parent().parent().removeClass('slaider-menu-items-show');
