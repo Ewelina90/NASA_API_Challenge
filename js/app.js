@@ -4,6 +4,7 @@ $(() => {
     const $loadBtn = $('.load-btn');
     const $gallery = $('.container');
     const $menuOff = $('#bars');
+    const $animation = $('.wrapper');
 
     // Hamburger menu
     $menuOff.on('click',function(){
@@ -90,19 +91,19 @@ $(() => {
         })
     }
 
-    //Image for slaider
-    // $.ajax({
-    //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
-    // }).done(response => {
-    //     const img = 'url("'+response.hdurl+'")';
-    //     console.log(img);
-    //     $slaider.css('background-image',img);
-    //     showText("#msg",response.explanation , 0, 50);
-    // }).fail(error => {
-    //     console.log('error');
-    // }).always(() => {
-    //     alert( "complete" );
-    // });
+    // Image for slaider
+    $.ajax({
+        url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+    }).done(response => {
+        $animation.css('display','none');
+        $animation.find('.loading').removeClass('loading');
+        const img = 'url("'+response.hdurl+'")';
+        console.log(img);
+        $slaider.css('background-image',img);
+        showText("#msg",response.explanation , 0, 50);
+    }).fail(error => {
+        console.log('error');
+    });
 
     getImagesFromApi();
 
