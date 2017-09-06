@@ -1,5 +1,5 @@
 $(() => {
-
+    // Variables
     const $slaider = $('.slaider');
     const $loadBtn = $('.load-btn');
     const $gallery = $('.container');
@@ -27,7 +27,7 @@ $(() => {
         }
     });
 
-    //  Close menu border-width: 3px 0 3px 3px; after click on link
+    //  Close menu after click on the link
     $('#menu-items a').on('click',function(){
         if($menuOff.hasClass('fa-times')){
             $(this).parent().parent().removeClass('slaider-menu-items-show');
@@ -37,13 +37,12 @@ $(() => {
         }
     });
 
-
-    //random number form range
+    // Random number form range
     const getRandomInt = (min,max) => {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    //random date
+    // Random date
     const getRandomDate = () => {
         const day = getRandomInt(1,28);
         const month = getRandomInt(1,12);
@@ -51,7 +50,8 @@ $(() => {
 
         return year+'-'+month+'-'+day;
     }
-    // create new pictures for gallery
+
+    // Create new pictures for Mars gallery
     const addNewImages = (link) => {
         const $newDiv = $('<div>',{class:"group-images"});
         const $newUl = $('<ul>',{class:"images"});
@@ -66,17 +66,18 @@ $(() => {
         $gallery.append($newDiv);
     }
 
+    // Get random Mars day
     const getRandomSol = () => {
         const sol = getRandomInt(1,1728);
         return sol;
     }
+
     //Btn - load more pictures into gallery
     $loadBtn.on('click',function(){
         getImagesFromApi();
-
     });
 
-    //function - get images of a Mars from NASA
+    //Function - get images of a Mars from NASA
     const getImagesFromApi = () => {
         $.ajax({
             url: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&sol='+getRandomSol()
@@ -92,21 +93,29 @@ $(() => {
     }
 
     // Image for slaider
-    // $.ajax({
-    //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
-    // }).done(response => {
-    //     $animation.css('display','none');
-    //     $animation.find('.loading').removeClass('loading');
-    //     const img = 'url("'+response.hdurl+'")';
-    //     console.log(img);
-    //     $slaider.css('background-image',img);
-    //     showText("#msg",response.explanation , 0, 50);
-    // }).fail(error => {
-    //     console.log('error');
-    // });
-
+    const getApodImg = () => {
+        $.ajax({
+            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+        }).done(response => {
+            // Get response url
+            const img = 'url("'+response.url+'")';
+            // Set img as background-image
+            $slaider.css('background-image',img);
+            // Hide loadng animation
+            $animation.hide();
+            // Display description
+            $('#msg').show();
+            showText(".picture-title",response.title , 0, 50);
+        }).fail(error => {
+            console.log('error');
+        });
+    }
+    // Slaider images
+    getApodImg();
+    // Mars images
     getImagesFromApi();
 
+    // set picture description
     const showText = (target, message, index, interval) => {
         if (index < message.length) {
             $(target).append(message[index++]);
