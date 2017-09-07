@@ -82,6 +82,7 @@ $(function () {
     var $animation = $('.wrapper');
     var $rightArrow = $('.right-arrow');
     var $leftArrow = $('.left-arrow');
+    var slaiderArr = [];
 
     // Slaider right
     $rightArrow.on('click', function () {});
@@ -182,7 +183,9 @@ $(function () {
         }), $.ajax({
             url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
         })).then(function (resp1, resp2, resp3) {
+            // need to check if type is image
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
+            slaiderArr.push(responsesArr);
 
             //this callback will be fired once all ajax calls have finished.
         });
