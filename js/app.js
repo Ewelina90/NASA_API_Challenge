@@ -122,12 +122,32 @@ $(() => {
             // need to check if type is image
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
             slaiderArr.push(responsesArr);
+            createNewSlides(responsesArr);
 
 
             //this callback will be fired once all ajax calls have finished.
         });
 
-        
+        const createNewSlides = (responsesArray) => {
+            $(responsesArray).each(function(index,el){
+                console.log(el.title);
+                createListElement(index,el.url,el.title);
+            });
+        };
+
+        const createListElement = (index,url,title) => {
+            const $slaiderUl = $('.active-picture');
+            let $newLi = $('<li>',{'data-url':url,'data-title':title});
+            let $newIcon
+            if(index === 0){
+                $newIcon = $('<i>',{class:"fa fa-circle", 'aria-hidden':"true"});
+            }else{
+                $newIcon = $('<i>',{class:"fa fa-circle-thin", 'aria-hidden':"true"});
+            }
+            console.log($newIcon);
+            $newLi.append($newIcon);
+            $slaiderUl.append($newLi);
+        }
 
         // $.ajax({
         //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()

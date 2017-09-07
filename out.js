@@ -186,9 +186,31 @@ $(function () {
             // need to check if type is image
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
             slaiderArr.push(responsesArr);
+            createNewSlides(responsesArr);
 
             //this callback will be fired once all ajax calls have finished.
         });
+
+        var createNewSlides = function createNewSlides(responsesArray) {
+            $(responsesArray).each(function (index, el) {
+                console.log(el.title);
+                createListElement(index, el.url, el.title);
+            });
+        };
+
+        var createListElement = function createListElement(index, url, title) {
+            var $slaiderUl = $('.active-picture');
+            var $newLi = $('<li>', { 'data-url': url, 'data-title': title });
+            var $newIcon = void 0;
+            if (index === 0) {
+                $newIcon = $('<i>', { class: "fa fa-circle", 'aria-hidden': "true" });
+            } else {
+                $newIcon = $('<i>', { class: "fa fa-circle-thin", 'aria-hidden': "true" });
+            }
+            console.log($newIcon);
+            $newLi.append($newIcon);
+            $slaiderUl.append($newLi);
+        };
 
         // $.ajax({
         //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
