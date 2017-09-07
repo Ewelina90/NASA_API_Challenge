@@ -5,6 +5,18 @@ $(() => {
     const $gallery = $('.container');
     const $menuOff = $('#bars');
     const $animation = $('.wrapper');
+    const $rightArrow = $('.right-arrow');
+    const $leftArrow = $('.left-arrow');
+
+    // Slaider right
+    $rightArrow.on('click',function(){
+
+    });
+
+    // Slaider left - get more pictures
+    $rightArrow.on('click',function(){
+
+    });
 
     // Hamburger menu
     $menuOff.on('click',function(){
@@ -94,21 +106,39 @@ $(() => {
 
     // Image for slaider
     const getApodImg = () => {
-        $.ajax({
-            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
-        }).done(response => {
-            // Get response url
-            const img = 'url("'+response.url+'")';
-            // Set img as background-image
-            $slaider.css('background-image',img);
-            // Hide loadng animation
-            $animation.hide();
-            // Display description
-            $('#msg').show();
-            showText(".picture-title",response.title , 0, 50);
-        }).fail(error => {
-            console.log('error');
+        $.when(
+            $.ajax({
+                 url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+            }),
+            $.ajax({
+                 url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+            }),
+            $.ajax({
+                 url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+            })
+        )
+        .then(function (resp1,resp2,resp3) {
+            const responsesArr = [resp1[0],resp2[0],resp3[0]];
+            
+
+            //this callback will be fired once all ajax calls have finished.
         });
+
+        // $.ajax({
+        //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
+        // }).done(response => {
+        //     // Get response url
+        //     const img = 'url("'+response.url+'")';
+        //     // Set img as background-image
+        //     $slaider.css('background-image',img);
+        //     // Hide loadng animation
+        //     $animation.hide();
+        //     // Display description
+        //     $('#msg').show();
+        //     showText(".picture-title",response.title , 0, 50);
+        // }).fail(error => {
+        //     console.log('error');
+        // });
     }
     // Slaider images
     getApodImg();
