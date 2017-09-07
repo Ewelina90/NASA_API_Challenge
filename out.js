@@ -187,6 +187,7 @@ $(function () {
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
+            $animation.hide();
 
             //this callback will be fired once all ajax calls have finished.
         });
@@ -202,12 +203,13 @@ $(function () {
             var $slaiderUl = $('.active-picture');
             var $newLi = $('<li>', { 'data-url': url, 'data-title': title });
             var $newIcon = void 0;
+
             if (index === 0) {
                 $newIcon = $('<i>', { class: "fa fa-circle", 'aria-hidden': "true" });
             } else {
                 $newIcon = $('<i>', { class: "fa fa-circle-thin", 'aria-hidden': "true" });
             }
-            console.log($newIcon);
+
             $newLi.append($newIcon);
             $slaiderUl.append($newLi);
         };
