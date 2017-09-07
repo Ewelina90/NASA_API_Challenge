@@ -138,13 +138,14 @@ $(() => {
         const createListElement = (index,url,title) => {
             const $slaiderUl = $('.active-picture');
             let $newLi = $('<li>',{'data-url':url,'data-title':title});
-            let $newIcon
+            let $newIcon;
+
             if(index === 0){
                 $newIcon = $('<i>',{class:"fa fa-circle", 'aria-hidden':"true"});
             }else{
                 $newIcon = $('<i>',{class:"fa fa-circle-thin", 'aria-hidden':"true"});
             }
-            console.log($newIcon);
+
             $newLi.append($newIcon);
             $slaiderUl.append($newLi);
         }
