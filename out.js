@@ -85,10 +85,12 @@ $(function () {
     var slaiderArr = [];
 
     // Slaider right
-    $rightArrow.on('click', function () {});
+    $rightArrow.on('click', function () {
+        getApodImg();
+    });
 
     // Slaider left - get more pictures
-    $rightArrow.on('click', function () {});
+    $leftArrow.on('click', function () {});
 
     // Hamburger menu
     $menuOff.on('click', function () {
@@ -176,7 +178,7 @@ $(function () {
 
     // Image for slaider
     var getApodImg = function getApodImg() {
-        $.when($.ajax({
+        $.when($animation.show(), $.ajax({
             url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
         }), $.ajax({
             url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
@@ -187,8 +189,7 @@ $(function () {
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
-            // $animation.hide();
-
+            $animation.hide();
 
             //this callback will be fired once all ajax calls have finished.
         });
