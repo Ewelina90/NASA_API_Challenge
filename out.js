@@ -86,6 +86,8 @@ $(function () {
 
     // Slaider right
     $rightArrow.on('click', function () {
+        // $slaiderUl.last().removeClass('fa-circle');
+        // $slaiderUl.last().addClass('fa-circle-thin');
         getApodImg();
     });
 
