@@ -123,7 +123,7 @@ $(() => {
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
-            $animation.hide();
+            // $animation.hide();
 
 
             //this callback will be fired once all ajax calls have finished.
