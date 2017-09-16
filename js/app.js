@@ -9,28 +9,40 @@ $(() => {
     const $leftArrow = $('.left-arrow');
     const slaiderArr = [];
 
-    // Slaider right
+    // Slaider right - get more pictures
     $rightArrow.on('click',function(){
+        changeSlaider('right');
+    });
+
+    // Slaider left
+    $leftArrow.on('click',function(){
+        changeSlaider('left');
+    });
+
+    const changeSlaider = (direction) => {
         const $slaiderUl = $('.active-picture');
         const $numOfSliderElements = $slaiderUl.children().length;
         let $activeSlaid = $slaiderUl.find('.fa-circle');
-        let $nextSlaid = $activeSlaid.parent().next().find('i');
-        if($numOfSliderElements > 0 && $nextSlaid.length !== 0){
-            $activeSlaid.removeClass('fa-circle');
-            $activeSlaid.addClass('fa-circle-thin');
-            $nextSlaid.removeClass('fa-circle-thin');
-            $nextSlaid.addClass('fa-circle');
-
-        }else{
-            getApodImg();
+        if(direction === 'left'){
+            let $directionSlaid = $activeSlaid.parent().prev().find('i');
+            if($numOfSliderElements > 0 && $directionSlaid.length !== 0){
+                $activeSlaid.removeClass('fa-circle');
+                $activeSlaid.addClass('fa-circle-thin');
+                $directionSlaid.removeClass('fa-circle-thin');
+                $directionSlaid.addClass('fa-circle');
+            }
+        }else {
+            let $directionSlaid = $activeSlaid.parent().next().find('i');
+            if($numOfSliderElements > 0 && $directionSlaid.length !== 0){
+                $activeSlaid.removeClass('fa-circle');
+                $activeSlaid.addClass('fa-circle-thin');
+                $directionSlaid.removeClass('fa-circle-thin');
+                $directionSlaid.addClass('fa-circle');
+            }else{
+                getApodImg();
+            }
         }
-
-    });
-
-    // Slaider left - get more pictures
-    $leftArrow.on('click',function(){
-
-    });
+    };
 
     // Hamburger menu
     $menuOff.on('click',function(){

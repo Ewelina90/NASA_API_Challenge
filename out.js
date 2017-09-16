@@ -84,24 +84,40 @@ $(function () {
     var $leftArrow = $('.left-arrow');
     var slaiderArr = [];
 
-    // Slaider right
+    // Slaider right - get more pictures
     $rightArrow.on('click', function () {
+        changeSlaider('right');
+    });
+
+    // Slaider left
+    $leftArrow.on('click', function () {
+        changeSlaider('left');
+    });
+
+    var changeSlaider = function changeSlaider(direction) {
         var $slaiderUl = $('.active-picture');
         var $numOfSliderElements = $slaiderUl.children().length;
         var $activeSlaid = $slaiderUl.find('.fa-circle');
-        var $nextSlaid = $activeSlaid.parent().next().find('i');
-        if ($numOfSliderElements > 0 && $nextSlaid.length !== 0) {
-            $activeSlaid.removeClass('fa-circle');
-            $activeSlaid.addClass('fa-circle-thin');
-            $nextSlaid.removeClass('fa-circle-thin');
-            $nextSlaid.addClass('fa-circle');
+        if (direction === 'left') {
+            var $directionSlaid = $activeSlaid.parent().prev().find('i');
+            if ($numOfSliderElements > 0 && $directionSlaid.length !== 0) {
+                $activeSlaid.removeClass('fa-circle');
+                $activeSlaid.addClass('fa-circle-thin');
+                $directionSlaid.removeClass('fa-circle-thin');
+                $directionSlaid.addClass('fa-circle');
+            }
         } else {
-            getApodImg();
+            var _$directionSlaid = $activeSlaid.parent().next().find('i');
+            if ($numOfSliderElements > 0 && _$directionSlaid.length !== 0) {
+                $activeSlaid.removeClass('fa-circle');
+                $activeSlaid.addClass('fa-circle-thin');
+                _$directionSlaid.removeClass('fa-circle-thin');
+                _$directionSlaid.addClass('fa-circle');
+            } else {
+                getApodImg();
+            }
         }
-    });
-
-    // Slaider left - get more pictures
-    $leftArrow.on('click', function () {});
+    };
 
     // Hamburger menu
     $menuOff.on('click', function () {
