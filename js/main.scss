@@ -76,16 +76,22 @@ a:hover {
     .left-arrow {
         @extend %mixinArrow;
         left: $slaider-menu-padding-hor;
+        transform: scale(1);
+        transition: 0.2s;
+        &:hover {
+            @extend %mixinHoverEffect;
+        }
     }
     .right-arrow {
         @extend %mixinArrow;
         right: $slaider-menu-padding-hor;
         text-align: right;
+        transform: scale(1);
+        transition: 0.2s;
+        &:hover {
+            @extend %mixinHoverEffect;
+        }
     }
-    // h1 {
-    //     font-size: 3rem;
-    //     text-shadow: 1px 1px navy;
-    // }
     #msg {
         display: none;
         position: absolute;

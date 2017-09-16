@@ -21,3 +21,9 @@ $slaider-menu-padding-ver: 20px;
         padding-top: calc(100vh/2 - 3rem);
     }
 }
+%mixinHoverEffect {
+    cursor: pointer;
+    transform: scale(1.1);
+    transform-origin: center;
+    transition: 0.2s;
+}

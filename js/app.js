@@ -156,7 +156,6 @@ $(() => {
             })
         )
         .then(function (resp1,resp2,resp3) {
-            // need to check if type is image
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
             console.log(responsesArr);
             slaiderArr.push(responsesArr);
