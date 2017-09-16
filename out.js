@@ -84,14 +84,25 @@ $(function () {
     var $leftArrow = $('.left-arrow');
     var slaiderArr = [];
 
+    // Set img as background
+    var setImgBackground = function setImgBackground() {
+        var $activeElement = $('.active-picture').find('.fa-circle');
+        var $image = $activeElement.parent().data('url');
+        var $title = $activeElement.parent().data('title');
+        console.log($image);
+        console.log($title);
+    };
+
     // Slaider right - get more pictures
     $rightArrow.on('click', function () {
         changeSlaider('right');
+        setImgBackground();
     });
 
     // Slaider left
     $leftArrow.on('click', function () {
         changeSlaider('left');
+        setImgBackground();
     });
 
     var changeSlaider = function changeSlaider(direction) {
@@ -205,7 +216,8 @@ $(function () {
 
     // Image for slaider
     var getApodImg = function getApodImg() {
-        $.when($animation.show(), $.ajax({
+        $animation.show();
+        $.when($.ajax({
             url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
         }), $.ajax({
             url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
@@ -214,6 +226,7 @@ $(function () {
         })).then(function (resp1, resp2, resp3) {
             // need to check if type is image
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
+            console.log(responsesArr);
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
             $animation.hide();
@@ -222,6 +235,7 @@ $(function () {
                 $activeSlaidPrev.removeClass('fa-circle');
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
+            setImgBackground();
             //this callback will be fired once all ajax calls have finished.
         });
 

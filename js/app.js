@@ -9,14 +9,25 @@ $(() => {
     const $leftArrow = $('.left-arrow');
     const slaiderArr = [];
 
+    // Set img as background
+    const setImgBackground = () =>{
+        const $activeElement = $('.active-picture').find('.fa-circle');
+        let $image = $activeElement.parent().data('url');
+        let $title = $activeElement.parent().data('title');
+        console.log($image);
+        console.log($title);
+    }
+
     // Slaider right - get more pictures
     $rightArrow.on('click',function(){
         changeSlaider('right');
+        setImgBackground();
     });
 
     // Slaider left
     $leftArrow.on('click',function(){
         changeSlaider('left');
+        setImgBackground();
     });
 
     const changeSlaider = (direction) => {
@@ -132,8 +143,8 @@ $(() => {
 
     // Image for slaider
     const getApodImg = () => {
+        $animation.show();
         $.when(
-            $animation.show(),
             $.ajax({
                  url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
             }),
@@ -147,6 +158,7 @@ $(() => {
         .then(function (resp1,resp2,resp3) {
             // need to check if type is image
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
+            console.log(responsesArr);
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
             $animation.hide();
@@ -155,6 +167,7 @@ $(() => {
                 $activeSlaidPrev.removeClass('fa-circle');
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
+            setImgBackground();
             //this callback will be fired once all ajax calls have finished.
         });
 
