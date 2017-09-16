@@ -14,8 +14,8 @@ $(() => {
         const $activeElement = $('.active-picture').find('.fa-circle');
         let $image = $activeElement.parent().data('url');
         let $title = $activeElement.parent().data('title');
-        console.log($image);
-        console.log($title);
+        $slaider.css('background-image','url('+$image+')');
+
     }
 
     // Slaider right - get more pictures
