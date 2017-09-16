@@ -1,7 +1,7 @@
 {
   "name": "testproject",
   "version": "1.0.0",
-  "description": "> Odpowiedzi wpisz w odpowiednich plikach, chyba że treść polecenia wskazuje inaczej.\r Pamiętaj, żeby oddzielać ćwiczenia komentarzami i pisać czytelny, dobrze sformatowany kod.\r Jeśli  polecenie w zadaniach brzmi: \"Stwórz nową funkcję, w której wykonasz te czynności\" to znaczy, że\r należy stworzyć funkcję. Nawet jeśli treści zadań są mało skomplikowane\r ucz się używać funkcji.",
+  "description": "NASA API",
   "main": "webpack.config.js",
   "dependencies": {
     "babel-core": "^6.24.1",
