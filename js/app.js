@@ -11,9 +11,20 @@ $(() => {
 
     // Slaider right
     $rightArrow.on('click',function(){
-        // $slaiderUl.last().removeClass('fa-circle');
-        // $slaiderUl.last().addClass('fa-circle-thin');
-        getApodImg();
+        const $slaiderUl = $('.active-picture');
+        const $numOfSliderElements = $slaiderUl.children().length;
+        let $activeSlaid = $slaiderUl.find('.fa-circle');
+        let $nextSlaid = $activeSlaid.parent().next().find('i');
+        if($numOfSliderElements > 0 && $nextSlaid.length !== 0){
+            $activeSlaid.removeClass('fa-circle');
+            $activeSlaid.addClass('fa-circle-thin');
+            $nextSlaid.removeClass('fa-circle-thin');
+            $nextSlaid.addClass('fa-circle');
+
+        }else{
+            getApodImg();
+        }
+
     });
 
     // Slaider left - get more pictures
@@ -127,14 +138,16 @@ $(() => {
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
             $animation.hide();
-
-
+            if(slaiderArr.length > 1){
+                let $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
+                $activeSlaidPrev.removeClass('fa-circle');
+                $activeSlaidPrev.addClass('fa-circle-thin');
+            }
             //this callback will be fired once all ajax calls have finished.
         });
 
         const createNewSlides = (responsesArray) => {
             $(responsesArray).each(function(index,el){
-                console.log(el.title);
                 createListElement(index,el.url,el.title);
             });
         };

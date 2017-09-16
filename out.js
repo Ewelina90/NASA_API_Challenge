@@ -86,9 +86,18 @@ $(function () {
 
     // Slaider right
     $rightArrow.on('click', function () {
-        // $slaiderUl.last().removeClass('fa-circle');
-        // $slaiderUl.last().addClass('fa-circle-thin');
-        getApodImg();
+        var $slaiderUl = $('.active-picture');
+        var $numOfSliderElements = $slaiderUl.children().length;
+        var $activeSlaid = $slaiderUl.find('.fa-circle');
+        var $nextSlaid = $activeSlaid.parent().next().find('i');
+        if ($numOfSliderElements > 0 && $nextSlaid.length !== 0) {
+            $activeSlaid.removeClass('fa-circle');
+            $activeSlaid.addClass('fa-circle-thin');
+            $nextSlaid.removeClass('fa-circle-thin');
+            $nextSlaid.addClass('fa-circle');
+        } else {
+            getApodImg();
+        }
     });
 
     // Slaider left - get more pictures
@@ -192,13 +201,16 @@ $(function () {
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
             $animation.hide();
-
+            if (slaiderArr.length > 1) {
+                var $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
+                $activeSlaidPrev.removeClass('fa-circle');
+                $activeSlaidPrev.addClass('fa-circle-thin');
+            }
             //this callback will be fired once all ajax calls have finished.
         });
 
         var createNewSlides = function createNewSlides(responsesArray) {
             $(responsesArray).each(function (index, el) {
-                console.log(el.title);
                 createListElement(index, el.url, el.title);
             });
         };
