@@ -173,7 +173,9 @@ $(() => {
 
         const createNewSlides = (responsesArray) => {
             $(responsesArray).each(function(index,el){
-                createListElement(index,el.url,el.title);
+                if(el.media_type === 'image'){
+                    createListElement(index,el.url,el.title);
+                }
             });
         };
 
