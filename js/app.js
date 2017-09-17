@@ -30,7 +30,9 @@ $(() => {
         let $image = $activeElement.parent().data('url');
         let $title = $activeElement.parent().data('title');
         $slaider.css('background-image','url('+$image+')');
-        $('.picture-title').text($title);
+        $('.picture-title').empty();
+        showText('.picture-title', $title, 0, 50);
+
     }
 
     // Slaider right - get more pictures
