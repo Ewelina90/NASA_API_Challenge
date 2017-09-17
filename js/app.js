@@ -158,17 +158,24 @@ $(() => {
         .then(function (resp1,resp2,resp3) {
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
             console.log(responsesArr);
+            preloading(responsesArr);
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
-            $animation.hide();
             if(slaiderArr.length > 1){
                 let $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
                 $activeSlaidPrev.removeClass('fa-circle');
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
             setImgBackground();
-            //this callback will be fired once all ajax calls have finished.
+            $animation.hide();
         });
+
+        const preloading = (responsesArray) => {
+            $(responsesArray).each(function(index,el){
+                let img = new Image();
+                img.src = `${el.url}`;
+            })
+        }
 
         const createNewSlides = (responsesArray) => {
             $(responsesArray).each(function(index,el){

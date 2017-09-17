@@ -225,17 +225,24 @@ $(function () {
         })).then(function (resp1, resp2, resp3) {
             var responsesArr = [resp1[0], resp2[0], resp3[0]];
             console.log(responsesArr);
+            preloading(responsesArr);
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
-            $animation.hide();
             if (slaiderArr.length > 1) {
                 var $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
                 $activeSlaidPrev.removeClass('fa-circle');
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
             setImgBackground();
-            //this callback will be fired once all ajax calls have finished.
+            $animation.hide();
         });
+
+        var preloading = function preloading(responsesArray) {
+            $(responsesArray).each(function (index, el) {
+                var img = new Image();
+                img.src = '' + el.url;
+            });
+        };
 
         var createNewSlides = function createNewSlides(responsesArray) {
             $(responsesArray).each(function (index, el) {
