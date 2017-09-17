@@ -93,7 +93,7 @@ a:hover {
         }
     }
     #msg {
-        display: none;
+        display: block;
         position: absolute;
         max-width: 50%;
         bottom: 5.2rem;
@@ -130,6 +130,11 @@ a:hover {
             li {
                 display: inline-block;
                 padding-right: 1.1em;
+                i {
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
             }
         }
     }

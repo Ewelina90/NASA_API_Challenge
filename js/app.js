@@ -9,6 +9,21 @@ $(() => {
     const $leftArrow = $('.left-arrow');
     const slaiderArr = [];
 
+    // Change picture by clicking on dots
+    $('.active-picture').on('click','i',function(){
+        console.log(this);
+        if($(this).hasClass('fa-circle')){
+
+        }else{
+            let $active = $(this).parent().parent().find('.fa-circle');
+            $active.removeClass('fa-circle');
+            $active.addClass('fa-circle-thin');
+            $(this).removeClass('fa-circle-thin');
+            $(this).addClass('fa-circle');
+            setImgBackground();
+        }
+    });
+
     // Set img as background
     const setImgBackground = () =>{
         const $activeElement = $('.active-picture').find('.fa-circle');
@@ -96,7 +111,6 @@ $(() => {
         const day = getRandomInt(1,28);
         const month = getRandomInt(1,12);
         const year = getRandomInt(2010,2016);
-
         return year+'-'+month+'-'+day;
     }
 
@@ -167,7 +181,7 @@ $(() => {
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
             setImgBackground();
-            $animation.hide();
+            $animation.hide().fadeOut();
         });
 
         const preloading = (responsesArray) => {
