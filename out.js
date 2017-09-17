@@ -97,12 +97,13 @@ $(function () {
         }
     });
 
-    // Set img as background
+    // Set img as background and picture title
     var setImgBackground = function setImgBackground() {
         var $activeElement = $('.active-picture').find('.fa-circle');
         var $image = $activeElement.parent().data('url');
         var $title = $activeElement.parent().data('title');
         $slaider.css('background-image', 'url(' + $image + ')');
+        $('.picture-title').text($title);
     };
 
     // Slaider right - get more pictures

@@ -24,13 +24,13 @@ $(() => {
         }
     });
 
-    // Set img as background
+    // Set img as background and picture title
     const setImgBackground = () =>{
         const $activeElement = $('.active-picture').find('.fa-circle');
         let $image = $activeElement.parent().data('url');
         let $title = $activeElement.parent().data('title');
         $slaider.css('background-image','url('+$image+')');
-
+        $('.picture-title').text($title);
     }
 
     // Slaider right - get more pictures
