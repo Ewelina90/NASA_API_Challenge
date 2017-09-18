@@ -183,7 +183,7 @@ $(() => {
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
             setImgBackground();
-            $animation.hide().fadeOut();
+            // $animation.hide().fadeOut();
         });
 
         const preloading = (responsesArray) => {
