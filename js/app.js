@@ -4,7 +4,7 @@ $(() => {
     const $loadBtn = $('.load-btn');
     const $gallery = $('.container');
     const $menuOff = $('#bars');
-    const $animation = $('.wrapper');
+    const $animation = $('.universe');
     const $rightArrow = $('.right-arrow');
     const $leftArrow = $('.left-arrow');
     const slaiderArr = [];
@@ -159,7 +159,7 @@ $(() => {
 
     // Image for slaider
     const getApodImg = () => {
-        $animation.show();
+        $animation.fadeIn(500);
         $.when(
             $.ajax({
                  url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
@@ -183,7 +183,7 @@ $(() => {
                 $activeSlaidPrev.addClass('fa-circle-thin');
             }
             setImgBackground();
-            // $animation.hide().fadeOut();
+            $animation.fadeOut(2000);
         });
 
         const preloading = (responsesArray) => {

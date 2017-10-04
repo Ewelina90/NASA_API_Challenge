@@ -1,9 +1,15 @@
 .universe {
     position:relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    z-index: 9;
 }
 .planet {
     position: relative;
     z-index: 10;
+    top: calc(50% - 38px);
+    left: calc(50% - 38px);
     width: 77px;
     height: 77px;
     background: white;
@@ -15,19 +21,10 @@
 .wrapper {
   perspective: 1000px;
   position: absolute;
-  top: 50%;
+  top: calc(50% - 5px);
+  left: calc(50% - 21px);
   .inner {
     transform: rotateY(60deg) rotateX(60deg);
-    // .planet {
-    //   margin: 50px auto;
-    //   width: 77px;
-    //   height: 130px;
-    //   background: white;
-    //  -webkit-mask-image: -webkit-gradient(linear, left top,
-    //    left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
-    //   border-radius: 50%;
-    //   box-shadow: -1px -1px 3px 0px gray, -6px -15px 64px 0px black inset;
-    // }
     .loading{
       width:160px;
       height: 160px;
@@ -37,8 +34,8 @@
       border-width: 5px 0 5px 5px;
       position: relative;
       z-index: 1;
-      top:50%;
-      left:50%;
+      top: calc(50% - 38px);
+      left: calc(50% - 38px);
       margin-top:-80px;
       margin-left:-80px;
       animation: loading 1.2s linear infinite;
@@ -48,8 +45,6 @@
 }
 @keyframes loading{
   0%{transform:rotate(0deg)}
-  // 1% {z-index: -1 }
-  // 90% {z-index: 1}
   100%{transform:rotate(360deg)}
 }
 @-webkit-keyframes loading{
