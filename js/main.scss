@@ -110,16 +110,16 @@ a:hover {
             padding-top: $slaider-menu-padding-ver;
             font-size: 0.9rem;
         }
-        .expand {
-            font-size: 1.4rem;
-            color: white;
-            position: absolute;
-            z-index: 3;
-            right: -4px;
-            top: -6px;
-            transform: rotate(-45deg);
-            transform-origin: bottom;
-        }
+        // .expand {
+        //     font-size: 1.4rem;
+        //     color: white;
+        //     position: absolute;
+        //     z-index: 3;
+        //     right: -4px;
+        //     top: -6px;
+        //     transform: rotate(-45deg);
+        //     transform-origin: bottom;
+        // }
     }
     .slaider-active-pictures {
         position: absolute;
