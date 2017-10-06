@@ -50,6 +50,7 @@ $(() => {
         setImgBackground();
     });
 
+    // Change to next slaid
     const changeSlaider = (direction) => {
         const $slaiderUl = $('.active-picture');
         const $numOfSliderElements = $slaiderUl.children().length;
@@ -242,21 +243,6 @@ $(() => {
             $slaiderUl.append($newLi);
         }
 
-        // $.ajax({
-        //     url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date='+getRandomDate()
-        // }).done(response => {
-        //     // Get response url
-        //     const img = 'url("'+response.url+'")';
-        //     // Set img as background-image
-        //     $slaider.css('background-image',img);
-        //     // Hide loadng animation
-        //     $animation.hide();
-        //     // Display description
-        //     $('#msg').show();
-        //     showText(".picture-title",response.title , 0, 50);
-        // }).fail(error => {
-        //     console.log('error');
-        // });
     }
     // Slaider images
     getApodImg();

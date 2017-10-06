@@ -23,6 +23,9 @@ a:hover {
     transition: 0.2s;
     color: $nav-text-hover;
 }
+a.focus {
+    outline: none;
+}
 .slaider {
     @extend %mixinSection;
     flex-flow: column;
