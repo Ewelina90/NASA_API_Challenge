@@ -5,6 +5,28 @@
     background-color: black;
     z-index: 9;
 }
+.universe2 {
+    position:relative;
+    z-index: 9;
+    top: -160px;
+    height: 0px;
+    .planet {
+        background: #ff8c08;
+        -webkit-mask-image: -webkit-gradient(linear, left top,
+        left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+        box-shadow: -1px -1px 3px 0px #ff8c08, -6px -15px 64px 0px #9a2b00 inset;
+    }
+    .wrapper {
+        .inner {
+            .loading {
+                border-radius:50%;
+                border: solid #ff8c08;
+                border-top-color:rgba(0,0,0,0.0);
+                border-width: 5px 0 5px 5px;
+            }
+        }
+    }
+}
 .planet {
     position: relative;
     z-index: 10;

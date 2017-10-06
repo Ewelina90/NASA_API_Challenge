@@ -9,9 +9,9 @@
     font-size: 30px;
     color: white;
 }
-// .hide {
-//     display: none;
-// }
+body {
+    background-color: black;
+}
 .hide {
     display: none;
 }
@@ -110,16 +110,6 @@ a:hover {
             padding-top: $slaider-menu-padding-ver;
             font-size: 0.9rem;
         }
-        // .expand {
-        //     font-size: 1.4rem;
-        //     color: white;
-        //     position: absolute;
-        //     z-index: 3;
-        //     right: -4px;
-        //     top: -6px;
-        //     transform: rotate(-45deg);
-        //     transform-origin: bottom;
-        // }
     }
     .slaider-active-pictures {
         position: absolute;
@@ -189,7 +179,7 @@ a:hover {
     min-height: 100px;
     background: $galery-background;
     .load-btn {
-        background: $load-btn-background;
+        background: darken($load-btn-background,10%);
         border: none;
         padding: 0.5rem 1rem;
         font-size: 1rem;
@@ -198,7 +188,7 @@ a:hover {
         }
         &:focus {
             outline: none;
-            box-shadow: 0px 0px 3px 0px rgba(255,255,255,0.4);
+            box-shadow: 0px 0px 3px 3px #c86200 inset;;
         }
     }
 }

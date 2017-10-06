@@ -5,9 +5,12 @@ $(() => {
     const $gallery = $('.container');
     const $menuOff = $('#bars');
     const $animation = $('.universe');
+    const $animationMars = $('.universe2');
     const $rightArrow = $('.right-arrow');
     const $leftArrow = $('.left-arrow');
     const slaiderArr = [];
+    let errorAPOD = 0;
+    let errorMars = 0;
 
     // Change picture by clicking on dots
     $('.active-picture').on('click','i',function(){
@@ -124,11 +127,14 @@ $(() => {
         for(let i = 0; i < link.length; i++){
             let $newLi = $('<li>');
             let $newImg = $('<img>',{src: link[i] ,alt:'Photo of a Mars taken by the Curiosity rover'});
-            $newLi.append($newImg);
-            $newUl.append($newLi);
+            $newImg.on("load",function(){
+                    $newLi.append($newImg);
+                    $newUl.append($newLi);
+                })
         }
         $newDiv.append($newUl);
         $gallery.append($newDiv);
+        $animationMars.fadeOut(500);
     }
 
     // Get random Mars day
@@ -147,13 +153,22 @@ $(() => {
         $.ajax({
             url: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&sol='+getRandomSol()
         }).done(response => {
+            $animationMars.fadeIn(1);
             const links = [];
             for(let i = 0; i < 6 ;i++) {
-                links.push(response.photos[i].img_src);
+                if(response.photos[i] !== undefined){
+                    links.push(response.photos[i].img_src);
+                }
             }
             addNewImages(links);
         }).fail(error => {
-            console.log('wystąpił error');
+            if(errorMars > 5){
+                alert('Cannot download files from API NASA');
+            }else{
+                setTimeout(function(){
+                    getImagesFromApi();
+                },1000);
+            }
         })
     }
 
@@ -173,7 +188,7 @@ $(() => {
         )
         .then(function (resp1,resp2,resp3) {
             const responsesArr = [resp1[0],resp2[0],resp3[0]];
-            console.log(responsesArr);
+
             preloading(responsesArr);
             slaiderArr.push(responsesArr);
             createNewSlides(responsesArr);
@@ -184,7 +199,18 @@ $(() => {
             }
             setImgBackground();
             $animation.fadeOut(2000);
-        });
+        })
+        .fail(error => {
+            errorAPOD++;
+            if(errorAPOD > 5){
+                alert('Cannot download files from API NASA');
+            }else{
+                setTimeout(function(){
+                    getApodImg();
+                },1000);
+            }
+        })
+
 
         const preloading = (responsesArray) => {
             $(responsesArray).each(function(index,el){
