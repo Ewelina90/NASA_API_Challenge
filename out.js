@@ -86,9 +86,25 @@ $(function () {
     var slaiderArr = [];
     var errorAPOD = 0;
     var errorMars = 0;
+    var $apodLink = $('#apodLink');
+    var $marsLink = $('#marsLink');
+    // const $apodSection = $('#apod');
+    // const $marsSection = $('#mars');
+
+    $apodLink.on('click', function () {
+        $('html, body').animate({
+            scrollTop: $("#apod").offset().top
+        }, 1000);
+    });
+
+    $marsLink.on('click', function () {
+        $('html, body').animate({
+            scrollTop: $("#mars").offset().top
+        }, 1000);
+    }
 
     // Change picture by clicking on dots
-    $('.active-picture').on('click', 'i', function () {
+    );$('.active-picture').on('click', 'i', function () {
         console.log(this);
         if ($(this).hasClass('fa-circle')) {} else {
             var $active = $(this).parent().parent().find('.fa-circle');

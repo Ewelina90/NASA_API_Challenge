@@ -11,6 +11,22 @@ $(() => {
     const slaiderArr = [];
     let errorAPOD = 0;
     let errorMars = 0;
+    const $apodLink = $('#apodLink');
+    const $marsLink = $('#marsLink');
+    // const $apodSection = $('#apod');
+    // const $marsSection = $('#mars');
+
+    $apodLink.on('click',function(){
+        $('html, body').animate({
+            scrollTop: $("#apod").offset().top
+        }, 1000);
+    })
+
+    $marsLink.on('click',function(){
+        $('html, body').animate({
+            scrollTop: $("#mars").offset().top
+        }, 1000);
+    })
 
     // Change picture by clicking on dots
     $('.active-picture').on('click','i',function(){
