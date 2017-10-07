@@ -89,6 +89,8 @@ $(function () {
     var $apodLink = $('#apodLink');
     var $marsLink = $('#marsLink');
 
+    // Menu functions
+
     // scroll to apod section
     $apodLink.on('click', function () {
         $('html, body').animate({
@@ -103,8 +105,54 @@ $(function () {
         }, 1000);
     }
 
+    // Hamburger menu
+    );$menuOff.on('click', function () {
+        if ($(this).hasClass('fa-bars')) {
+            $(this).removeClass('fa-bars');
+            $(this).addClass('fa-times');
+        } else {
+            $(this).removeClass('fa-times');
+            $(this).addClass('fa-bars');
+        }
+        var $menuItems = $('#menu-items');
+        if ($menuItems.is(':hidden')) {
+            $menuItems.removeClass('slaider-menu-items');
+            $menuItems.addClass('slaider-menu-items-show');
+        } else {
+            $menuItems.removeClass('slaider-menu-items-show');
+            $menuItems.addClass('slaider-menu-items');
+        }
+    });
+
+    //  Close menu after click on the link
+    $('#menu-items a').on('click', function () {
+        if ($menuOff.hasClass('fa-times')) {
+            $(this).parent().parent().removeClass('slaider-menu-items-show');
+            $(this).parent().parent().addClass('slaider-menu-items');
+            $menuOff.removeClass('fa-times');
+            $menuOff.addClass('fa-bars');
+        }
+    });
+
+    // General functions
+
+    // Random number form range
+    var getRandomInt = function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+
+    // Random date
+    var getRandomDate = function getRandomDate() {
+        var day = getRandomInt(1, 28);
+        var month = getRandomInt(1, 12);
+        var year = getRandomInt(2010, 2016);
+        return year + '-' + month + '-' + day;
+    };
+
+    // APOD slider functions
+
     // Change picture by clicking on dots
-    );$('.active-picture').on('click', 'i', function () {
+    $('.active-picture').on('click', 'i', function () {
         console.log(this);
         if ($(this).hasClass('fa-circle')) {} else {
             var $active = $(this).parent().parent().find('.fa-circle');
@@ -164,47 +212,82 @@ $(function () {
         }
     };
 
-    // Hamburger menu
-    $menuOff.on('click', function () {
-        if ($(this).hasClass('fa-bars')) {
-            $(this).removeClass('fa-bars');
-            $(this).addClass('fa-times');
-        } else {
-            $(this).removeClass('fa-times');
-            $(this).addClass('fa-bars');
-        }
-        var $menuItems = $('#menu-items');
-        if ($menuItems.is(':hidden')) {
-            $menuItems.removeClass('slaider-menu-items');
-            $menuItems.addClass('slaider-menu-items-show');
-        } else {
-            $menuItems.removeClass('slaider-menu-items-show');
-            $menuItems.addClass('slaider-menu-items');
-        }
-    });
+    // Image for slaider
+    var getApodImg = function getApodImg() {
+        $animation.fadeIn(500);
+        $.when($.ajax({
+            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
+        }), $.ajax({
+            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
+        }), $.ajax({
+            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
+        })).then(function (resp1, resp2, resp3) {
+            var responsesArr = [resp1[0], resp2[0], resp3[0]];
 
-    //  Close menu after click on the link
-    $('#menu-items a').on('click', function () {
-        if ($menuOff.hasClass('fa-times')) {
-            $(this).parent().parent().removeClass('slaider-menu-items-show');
-            $(this).parent().parent().addClass('slaider-menu-items');
-            $menuOff.removeClass('fa-times');
-            $menuOff.addClass('fa-bars');
+            preloading(responsesArr);
+            slaiderArr.push(responsesArr);
+            createNewSlides(responsesArr);
+            if (slaiderArr.length > 1) {
+                var $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
+                $activeSlaidPrev.removeClass('fa-circle');
+                $activeSlaidPrev.addClass('fa-circle-thin');
+            }
+            setImgBackground();
+            $animation.fadeOut(2000);
+        }).fail(function (error) {
+            errorAPOD++;
+            if (errorAPOD > 5) {
+                alert('Cannot download files from API NASA');
+            } else {
+                setTimeout(function () {
+                    getApodImg();
+                }, 1000);
+            }
         }
-    });
 
-    // Random number form range
-    var getRandomInt = function getRandomInt(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+        // preload images for slaider
+        );var preloading = function preloading(responsesArray) {
+            $(responsesArray).each(function (index, el) {
+                var img = new Image();
+                img.src = '' + el.url;
+            });
+        };
+
+        var createNewSlides = function createNewSlides(responsesArray) {
+            $(responsesArray).each(function (index, el) {
+                if (el.media_type === 'image') {
+                    createListElement(index, el.url, el.title);
+                }
+            });
+        };
+
+        var createListElement = function createListElement(index, url, title) {
+            var $slaiderUl = $('.active-picture');
+            var $newLi = $('<li>', { 'data-url': url, 'data-title': title });
+            var $newIcon = void 0;
+
+            if (index === 0) {
+                $newIcon = $('<i>', { class: "fa fa-circle", 'aria-hidden': "true" });
+            } else {
+                $newIcon = $('<i>', { class: "fa fa-circle-thin", 'aria-hidden': "true" });
+            }
+
+            $newLi.append($newIcon);
+            $slaiderUl.append($newLi);
+        };
     };
 
-    // Random date
-    var getRandomDate = function getRandomDate() {
-        var day = getRandomInt(1, 28);
-        var month = getRandomInt(1, 12);
-        var year = getRandomInt(2010, 2016);
-        return year + '-' + month + '-' + day;
+    // set picture description
+    var showText = function showText(target, message, index, interval) {
+        if (index < message.length) {
+            $(target).append(message[index++]);
+            setTimeout(function () {
+                showText(target, message, index, interval);
+            }, interval);
+        }
     };
+
+    // MARS section
 
     // Create new pictures for Mars gallery
     var addNewImages = function addNewImages(link) {
@@ -263,83 +346,10 @@ $(function () {
         });
     };
 
-    // Image for slaider
-    var getApodImg = function getApodImg() {
-        $animation.fadeIn(500);
-        $.when($.ajax({
-            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
-        }), $.ajax({
-            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
-        }), $.ajax({
-            url: 'https://api.nasa.gov/planetary/apod?&api_key=8OMH6j4AYg49k56NSqvfwKHgwxOgb2XiR2KEVSJ7&date=' + getRandomDate()
-        })).then(function (resp1, resp2, resp3) {
-            var responsesArr = [resp1[0], resp2[0], resp3[0]];
-
-            preloading(responsesArr);
-            slaiderArr.push(responsesArr);
-            createNewSlides(responsesArr);
-            if (slaiderArr.length > 1) {
-                var $activeSlaidPrev = $('.active-picture').find('.fa-circle:first');
-                $activeSlaidPrev.removeClass('fa-circle');
-                $activeSlaidPrev.addClass('fa-circle-thin');
-            }
-            setImgBackground();
-            $animation.fadeOut(2000);
-        }).fail(function (error) {
-            errorAPOD++;
-            if (errorAPOD > 5) {
-                alert('Cannot download files from API NASA');
-            } else {
-                setTimeout(function () {
-                    getApodImg();
-                }, 1000);
-            }
-        });
-
-        var preloading = function preloading(responsesArray) {
-            $(responsesArray).each(function (index, el) {
-                var img = new Image();
-                img.src = '' + el.url;
-            });
-        };
-
-        var createNewSlides = function createNewSlides(responsesArray) {
-            $(responsesArray).each(function (index, el) {
-                if (el.media_type === 'image') {
-                    createListElement(index, el.url, el.title);
-                }
-            });
-        };
-
-        var createListElement = function createListElement(index, url, title) {
-            var $slaiderUl = $('.active-picture');
-            var $newLi = $('<li>', { 'data-url': url, 'data-title': title });
-            var $newIcon = void 0;
-
-            if (index === 0) {
-                $newIcon = $('<i>', { class: "fa fa-circle", 'aria-hidden': "true" });
-            } else {
-                $newIcon = $('<i>', { class: "fa fa-circle-thin", 'aria-hidden': "true" });
-            }
-
-            $newLi.append($newIcon);
-            $slaiderUl.append($newLi);
-        };
-    };
     // Slaider images
     getApodImg();
     // Mars images
     getImagesFromApi();
-
-    // set picture description
-    var showText = function showText(target, message, index, interval) {
-        if (index < message.length) {
-            $(target).append(message[index++]);
-            setTimeout(function () {
-                showText(target, message, index, interval);
-            }, interval);
-        }
-    };
 });
 
 /***/ }),
