@@ -26,6 +26,9 @@ a:hover {
 a.focus {
     outline: none;
 }
+i:hover {
+    cursor: pointer;
+}
 .slaider {
     @extend %mixinSection;
     flex-flow: column;
