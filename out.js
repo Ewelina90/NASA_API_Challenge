@@ -88,16 +88,16 @@ $(function () {
     var errorMars = 0;
     var $apodLink = $('#apodLink');
     var $marsLink = $('#marsLink');
-    // const $apodSection = $('#apod');
-    // const $marsSection = $('#mars');
 
+    // scroll to apod section
     $apodLink.on('click', function () {
         $('html, body').animate({
             scrollTop: $("#apod").offset().top
         }, 1000);
-    });
+    }
 
-    $marsLink.on('click', function () {
+    // scroll to mars section
+    );$marsLink.on('click', function () {
         $('html, body').animate({
             scrollTop: $("#mars").offset().top
         }, 1000);
@@ -246,7 +246,7 @@ $(function () {
         }).done(function (response) {
             $animationMars.fadeIn(1);
             var links = [];
-            for (var i = 0; i < 6; i++) {
+            for (var i = 0; i < 3; i++) {
                 if (response.photos[i] !== undefined) {
                     links.push(response.photos[i].img_src);
                 }

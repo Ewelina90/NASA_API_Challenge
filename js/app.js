@@ -13,15 +13,15 @@ $(() => {
     let errorMars = 0;
     const $apodLink = $('#apodLink');
     const $marsLink = $('#marsLink');
-    // const $apodSection = $('#apod');
-    // const $marsSection = $('#mars');
 
+    // scroll to apod section
     $apodLink.on('click',function(){
         $('html, body').animate({
             scrollTop: $("#apod").offset().top
         }, 1000);
     })
 
+    // scroll to mars section
     $marsLink.on('click',function(){
         $('html, body').animate({
             scrollTop: $("#mars").offset().top
@@ -172,7 +172,7 @@ $(() => {
         }).done(response => {
             $animationMars.fadeIn(1);
             const links = [];
-            for(let i = 0; i < 6 ;i++) {
+            for(let i = 0; i < 3 ;i++) {
                 if(response.photos[i] !== undefined){
                     links.push(response.photos[i].img_src);
                 }
